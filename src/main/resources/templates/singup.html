@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="login-form">
+		<form th:action="@{/singup}" th:method="post" th:object="${SignUpForm}">
+			<label class="loginId-label">ニックネーム</label>
+            <input type="text" name="name" id="name"><br />
+            <label class="loginId-label">メールアドレス</label>
+            <input type="text" name="email" id="email"><br />
+            <label class="password-label">パスワード</label>
+            <input type="password" name="password" id="password"><br />
+            <button type="submit" class="signup-btn">新規登録</button>
+        </form>
+        
+    </div>
+    
+
+    <button onclick="location.href='./login'" class="signup-link">ログイン</button>
+</body>
+</html>
