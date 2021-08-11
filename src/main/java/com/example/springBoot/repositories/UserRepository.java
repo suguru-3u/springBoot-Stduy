@@ -7,5 +7,7 @@ import com.example.springBoot.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer>{
+	
+	public UserEntity findByEmail(String email);
   
 }
