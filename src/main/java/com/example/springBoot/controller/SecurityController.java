@@ -1,6 +1,8 @@
 package com.example.springBoot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,20 +35,36 @@ public class SecurityController {
     }
 
     @RequestMapping(value="/hello", method=RequestMethod.POST)
-    public String hello() {
-       System.out.println("hello");
-       return "hello";
+    public ModelAndView helloPost(ModelAndView mav) {
+       System.out.println("helloPOST");
+       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+       System.out.println(auth);
+       //Principalからログインユーザの情報を取得
+       String userName = auth.getName();
+       mav.addObject("userName", userName);
+       mav.setViewName("hello");
+       return mav;
+    }   
+    
+    @RequestMapping(value="/hello", method=RequestMethod.GET)
+    public ModelAndView helloGet(ModelAndView mav) {
+       System.out.println("helloGET");
+       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+       System.out.println(auth);
+       //Principalからログインユーザの情報を取得
+       String userName = auth.getName();
+       mav.addObject("userName", userName);
+       mav.setViewName("hello");
+       return mav;
     }   
     
     @RequestMapping(value="/singup", method=RequestMethod.GET)
     public String singup() {
-       System.out.println("a");
        return "singup";
     }   
     
     @RequestMapping(value="/singup", method=RequestMethod.POST)
     public ModelAndView signup(SignUpForm signupForm, ModelAndView mav) {
-    	System.out.println("b");
         signupService.registUser(conversion.signupCon(signupForm));
         mav.setViewName("login");
         return mav;
