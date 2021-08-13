@@ -9,5 +9,9 @@ import com.example.springBoot.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	public UserEntity findByEmail(String email);
+	
+	public UserEntity findById(int id);
+	
+	public UserEntity findByName(String name);
   
 }

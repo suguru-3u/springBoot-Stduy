@@ -1,6 +1,8 @@
 package com.example.springBoot.dom;
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.example.springBoot.entity.UserEntity;
 import com.example.springBoot.repositories.UserRepository;
  	
+@Transactional
 @Component
 public class JpaUserDetailsServiceImpl implements UserDetailsService {
  
@@ -29,7 +32,9 @@ public class JpaUserDetailsServiceImpl implements UserDetailsService {
  
     	System.out.println("cc");
     	UserEntity account = accountRepository.findByEmail(email);
+    	
     	System.out.println("dd");
+    	
     	System.out.println(account);
     	
     	if  (account   ==  null)   {

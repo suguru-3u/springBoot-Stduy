@@ -1,12 +1,14 @@
 package com.example.springBoot.entity;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +20,7 @@ import lombok.Data;
 @Table(name="users")
 @Entity
 public class UserEntity  implements UserDetails {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,6 +33,9 @@ public class UserEntity  implements UserDetails {
     
     @Column(name = "password")
     private String password;
+    
+    @OneToMany(mappedBy = "user")
+    private List<TaskEntity> taskList;
 
     /* (非 Javadoc)
      * @see org.springframework.security.core.userdetails.UserDetails#getAuthorities()
@@ -88,6 +94,10 @@ public class UserEntity  implements UserDetails {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    
+    public int getUserId() {
+    	return this.id;
     }
 
      

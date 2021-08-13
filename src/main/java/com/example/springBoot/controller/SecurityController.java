@@ -1,5 +1,7 @@
 package com.example.springBoot.controller;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,9 +33,11 @@ public class SecurityController {
     public String home() {
     	UserEntity account = accountRepository.findByEmail("test2@gmail.com");
     	System.out.println(account);
+    	System.out.println("dd");
         return "home";
     }
 
+    @Transactional
     @RequestMapping(value="/hello", method=RequestMethod.POST)
     public ModelAndView helloPost(ModelAndView mav) {
        System.out.println("helloPOST");
@@ -43,6 +47,7 @@ public class SecurityController {
        String userName = auth.getName();
        mav.addObject("userName", userName);
        mav.setViewName("hello");
+       System.out.println("helloPOST2");
        return mav;
     }   
     
