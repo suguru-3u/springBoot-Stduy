@@ -3,15 +3,15 @@ package com.example.springBoot.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.springBoot.entity.UserEntity;
+import com.example.springBoot.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer>{
 	
-	public UserEntity findByEmail(String email);
+	public User findByEmail(String email);
 	
-	public UserEntity findById(int id);
+	public User findById(int id);
 	
-	public UserEntity findByName(String name);
+	public User findByName(String name);
   
 }

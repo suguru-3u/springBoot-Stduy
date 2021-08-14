@@ -8,9 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Table(name="tasks")
 @Entity
 public class TaskEntity {
@@ -25,6 +27,6 @@ public class TaskEntity {
     private String main;
     
     @ManyToOne
-    private UserEntity user;
+    private User user;
      
 }

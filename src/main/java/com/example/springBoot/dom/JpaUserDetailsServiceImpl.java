@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.example.springBoot.entity.UserEntity;
+import com.example.springBoot.entity.User;
 import com.example.springBoot.repositories.UserRepository;
  	
 @Transactional
@@ -31,7 +31,7 @@ public class JpaUserDetailsServiceImpl implements UserDetailsService {
         }
  
     	System.out.println("cc");
-    	UserEntity account = accountRepository.findByEmail(email);
+    	User account = accountRepository.findByEmail(email);
     	
     	System.out.println("dd");
     	

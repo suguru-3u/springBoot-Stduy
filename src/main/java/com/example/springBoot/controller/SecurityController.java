@@ -1,7 +1,5 @@
 package com.example.springBoot.controller;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.springBoot.entity.UserEntity;
 import com.example.springBoot.form.SignUpForm;
 import com.example.springBoot.repositories.UserRepository;
 import com.example.springBoot.service.SignupService;
@@ -30,22 +27,20 @@ public class SecurityController {
 	
 	
     @RequestMapping(value = {"/", "/home"})
-    public String home() {
-    	UserEntity account = accountRepository.findByEmail("test2@gmail.com");
-    	System.out.println(account);
-    	System.out.println("dd");
-        return "home";
+    public ModelAndView home(ModelAndView mav) { 
+        mav.setViewName("home");
+        return mav;
     }
 
-    @Transactional
+//    @Transactional
     @RequestMapping(value="/hello", method=RequestMethod.POST)
     public ModelAndView helloPost(ModelAndView mav) {
        System.out.println("helloPOST");
-       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-       System.out.println(auth);
-       //Principalからログインユーザの情報を取得
-       String userName = auth.getName();
-       mav.addObject("userName", userName);
+//       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//       System.out.println(auth);
+//       //Principalからログインユーザの情報を取得
+//       String userName = auth.getName();
+//       mav.addObject("userName", userName);
        mav.setViewName("hello");
        System.out.println("helloPOST2");
        return mav;

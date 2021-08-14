@@ -1,5 +1,7 @@
 package com.example.springBoot.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.springBoot.entity.TaskEntity;
-import com.example.springBoot.entity.UserEntity;
+import com.example.springBoot.entity.User;
 import com.example.springBoot.form.TaskForm;
 import com.example.springBoot.repositories.TaskReoisitory;
 import com.example.springBoot.repositories.UserRepository;
@@ -30,13 +32,22 @@ public class TaskService {
 	    //Principalからログインユーザの情報を取得
 	    String name = auth.getName();
 	    System.out.println(name);
-	    UserEntity user = userRepository.findByName(name);
+	    User user = userRepository.findByName(name);
 	    System.out.println(user);
 	    TaskEntity task = new TaskEntity();
 	    task.setTitle(taskform.getTitle());
 	    task.setMain(taskform.getMain());
 	    task.setUser(user);	    
 		taskReoisitory.save(task);		
+	}
+	
+//	@Transactional
+	public List<TaskEntity> getTaskAll(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    User user = userRepository.findByName(name);
+	    List<TaskEntity> tasks = taskReoisitory.findByUserId(user.getId());
+	    return tasks;
 	}
 }
 

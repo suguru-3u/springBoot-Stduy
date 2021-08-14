@@ -14,5 +14,19 @@
          <textarea name="main" cols="50" rows="5" th:field="*{main}"></textarea><br />
          <button type="submit" class="signup-btn">Task登録</button>
      </form>
+     <table border="1">
+		<tr>
+			<th>title</th>
+			<th>main</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr th:each="task: ${tasks}">
+			<td th:text="${task.title}"></td>
+			<td th:text="${task.main}"></td>
+			<td><a th:href="@{'/task/edit/' + ${task.id}}" >編集</a></td>
+			<td>削除</td>
+		</tr>
+	</table>
 </body>
 </html>
