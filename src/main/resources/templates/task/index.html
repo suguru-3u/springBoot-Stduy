@@ -18,7 +18,11 @@
 			<td th:text="${task.title}"></td>
 			<td th:text="${task.main}"></td>
 			<td><a th:href="@{'/task/edit/' + ${task.id}}" >編集</a></td>
-			<td>削除</td>
+			<td>
+				<form th:action="@{'/task/delete/' + ${task.id}}" method="post">
+					 <input type="submit" value="削除"/>
+			    </form>
+			</td>
 		</tr>
 	</table>
 </body>

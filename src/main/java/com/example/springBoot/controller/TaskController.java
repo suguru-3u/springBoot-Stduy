@@ -96,7 +96,6 @@ public class TaskController {
        taskUpdateRequest.setId(task.getId());
        taskUpdateRequest.setTitle(task.getTitle());
        taskUpdateRequest.setMain(task.getMain());
-//       taskUpdateRequest.setUser(task.getUser());
        
        mav.addObject("TaskUpdateRequest", taskUpdateRequest);
        
@@ -109,6 +108,23 @@ public class TaskController {
 	public ModelAndView taskUpdate(TaskUpdateRequest taskUpdateRequest, ModelAndView mav) {
 		
 		taskService.updateTask(taskUpdateRequest);
+		
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String userName = auth.getName();
+	    mav.addObject("userName", userName);
+	    mav.addObject("TaskForm", new TaskForm());
+        mav.setViewName("task/index");
+        List<TaskEntity> tasks = taskService.getTaskAll();
+        System.out.println(tasks);
+        mav.addObject("tasks", tasks);
+        
+    return mav;
+    }   
+	
+	@RequestMapping(value="/task/delete/{id}", method=RequestMethod.POST)
+	public ModelAndView taskDelete(@PathVariable int id, ModelAndView mav) {
+		
+		taskService.taskDelete(id);
 		
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String userName = auth.getName();

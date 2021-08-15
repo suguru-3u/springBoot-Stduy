@@ -64,5 +64,10 @@ public class TaskService {
 		
 		taskReoisitory.save(task);	
 	}
+	
+	public void taskDelete(int id) {
+		TaskEntity task =  getTask(id);	
+		taskReoisitory.delete(task);	
+	}
 }
 
