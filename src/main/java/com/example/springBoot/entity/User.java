@@ -14,12 +14,14 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Table(name="users")
 @Entity
-public class UserEntity  implements UserDetails {
+public class User  implements UserDetails {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,16 +82,16 @@ public class UserEntity  implements UserDetails {
     	return true;
     }
     
-    public UserEntity() {
+    public User() {
     }
     
-    public UserEntity(String name, String email , String password) {
+    public User(String name, String email , String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
     
-    public UserEntity(Integer id ,String name, String email , String password) {
+    public User(Integer id ,String name, String email , String password) {
     	this.id = id ;
         this.name = name;
         this.email = email;
