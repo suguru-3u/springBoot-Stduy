@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${userName}"></h1>
+	<h2>Hello Spring Boot Todo App</h2>
+	<form th:action="@{/task/create}" method="post" th:object="${TaskForm}">
+   		 <label class="loginId-label">Title</label>
+         <input type="text" name="title" id="title" th:field="*{title}"><br />
+         <label class="loginId-label">Main</label>
+         <textarea name="main" cols="50" rows="5" th:field="*{main}"></textarea><br />
+         <button type="submit" class="signup-btn">Task登録</button>
+     </form>
+</body>
+</html>

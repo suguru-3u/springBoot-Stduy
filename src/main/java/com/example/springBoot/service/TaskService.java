@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.springBoot.entity.TaskEntity;
 import com.example.springBoot.entity.User;
 import com.example.springBoot.form.TaskForm;
+import com.example.springBoot.form.TaskUpdateRequest;
 import com.example.springBoot.repositories.TaskReoisitory;
 import com.example.springBoot.repositories.UserRepository;
 
@@ -41,13 +42,27 @@ public class TaskService {
 		taskReoisitory.save(task);		
 	}
 	
-//	@Transactional
+
 	public List<TaskEntity> getTaskAll(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 	    User user = userRepository.findByName(name);
 	    List<TaskEntity> tasks = taskReoisitory.findByUserId(user.getId());
 	    return tasks;
+	}
+	
+	public TaskEntity getTask(int taskId) {
+		TaskEntity task = taskReoisitory.findById(taskId);
+	    return task;
+	}
+	
+	public void updateTask(TaskUpdateRequest taskUpdateRequest) {
+		TaskEntity task =  getTask(taskUpdateRequest.getId());
+		
+		task.setTitle(taskUpdateRequest.getTitle());
+		task.setMain(taskUpdateRequest.getMain());    
+		
+		taskReoisitory.save(task);	
 	}
 }
 

@@ -13,4 +13,6 @@ public interface TaskReoisitory extends JpaRepository<TaskEntity, Integer>{
 	
 	public List<TaskEntity> findByUserId(int userId);
 	
+	public TaskEntity findById(int taskId);
+	
 }
