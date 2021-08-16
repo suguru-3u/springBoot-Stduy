@@ -51,6 +51,14 @@ public class TaskService {
 	    return tasks;
 	}
 	
+	public List<TaskEntity> getTaaskAll(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    User user = userRepository.findByName(name);
+	    List<TaskEntity> tasks = taskReoisitory.findByUserId(user.getId());
+	    return tasks;
+	}
+	
 	public TaskEntity getTask(int taskId) {
 		TaskEntity task = taskReoisitory.findById(taskId);
 	    return task;
