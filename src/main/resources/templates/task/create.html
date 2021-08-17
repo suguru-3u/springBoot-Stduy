@@ -9,9 +9,14 @@
 	<h2>Hello Spring Boot Todo App</h2>
 	<form th:action="@{/task/create}" method="post" th:object="${TaskForm}">
    		 <label class="loginId-label">Title</label>
-         <input type="text" name="title" id="title" th:field="*{title}"><br />
+         <input type="text" name="title" id="title" th:field="*{title}" th:errorclass="err"><br />
+         <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="err"
+         th:text = >	
+         </div>
          <label class="loginId-label">Main</label>
          <textarea name="main" cols="50" rows="5" th:field="*{main}"></textarea><br />
+          <div th:if="${#fields.hasErrors('main')}" th:errors="*{title}" th:errorclass="err">	
+         </div>
          <button type="submit" class="signup-btn">Task登録</button>
      </form>
 </body>

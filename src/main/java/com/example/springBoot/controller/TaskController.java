@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,20 +54,32 @@ public class TaskController {
     }   
 	 
 	 @RequestMapping(value="/task/create", method=RequestMethod.POST)
-	 public ModelAndView signup(TaskForm taskform, ModelAndView mav) {
+	 public ModelAndView signup(@Validated TaskForm taskform,BindingResult result ,ModelAndView mav) {
 		 
-	   taskService.createTask(taskform);
-	   
-	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	   System.out.println(auth);
-	   String userName = auth.getName();
-	   mav.addObject("userName", userName);
-	   
-	   List<TaskEntity> tasks = taskService.getTaskAll();
-	   mav.addObject("tasks", tasks);
-	   
-       mav.setViewName("task/index");
-     return mav;
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth);
+		String userName = auth.getName();
+		mav.addObject("userName", userName);
+		
+		ModelAndView  res =  null ;
+	    if (result.hasErrors()) {
+	    	
+	    	mav.addObject("TaskForm",taskform);
+//		    mav.setViewName("/task/create");
+		    
+		    res = new ModelAndView("forward:/task/create");
+		    res = mav ;
+	    }else {
+	    	taskService.createTask(taskform);
+	    	
+//	    	List<TaskEntity> tasks = taskService.getTaskAll();
+//	    	mav.addObject("tasks", tasks);
+//	    	
+	    	
+	    	res = new ModelAndView("redirect:index");
+	    		
+	    }
+     return res;
     }   
 	 
 	 @RequestMapping(value="/task/create", method=RequestMethod.GET)
