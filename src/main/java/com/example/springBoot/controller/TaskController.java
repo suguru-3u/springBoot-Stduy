@@ -24,24 +24,10 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 	
-	@RequestMapping(value="/task/index", method=RequestMethod.POST)
-	public ModelAndView indexPost(ModelAndView mav) {
-	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	   System.out.println(auth);
-	   String userName = auth.getName();
-	   mav.addObject("userName", userName);
-       mav.setViewName("task/index");
-       List<TaskEntity> tasks = taskService.getTaskAll();
-       System.out.println(tasks);
-       mav.addObject("tasks", tasks);
-     return mav;
-    }   
-	
 	@RequestMapping(value="/task/index", method=RequestMethod.GET)
 	public ModelAndView indexGet(ModelAndView mav) {
 		
 	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	   System.out.println(auth);
 	   String userName = auth.getName();
 	   mav.addObject("userName", userName);
 	   
@@ -57,7 +43,6 @@ public class TaskController {
 	 public ModelAndView signup(@Validated TaskForm taskform,BindingResult result ,ModelAndView mav) {
 		 
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth);
 		String userName = auth.getName();
 		mav.addObject("userName", userName);
 		
@@ -65,40 +50,29 @@ public class TaskController {
 	    if (result.hasErrors()) {
 	    	
 	    	mav.addObject("TaskForm",taskform);
-//		    mav.setViewName("/task/create");
+		    mav.setViewName("/task/new");
 		    
-		    res = new ModelAndView("forward:/task/create");
 		    res = mav ;
 	    }else {
-	    	taskService.createTask(taskform);
 	    	
-//	    	List<TaskEntity> tasks = taskService.getTaskAll();
-//	    	mav.addObject("tasks", tasks);
-//	    	
-	    	
+	    	taskService.createTask(taskform);	    	
 	    	res = new ModelAndView("redirect:index");
 	    		
 	    }
      return res;
     }   
 	 
-	 @RequestMapping(value="/task/create", method=RequestMethod.GET)
+	 @RequestMapping(value="/task/new", method=RequestMethod.GET)
 	 public ModelAndView taskCreateGet(TaskForm taskform, ModelAndView mav) {
+		 
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 System.out.println(auth);
 		 String userName = auth.getName();
 		 mav.addObject("userName", userName);
+		 
 		 mav.addObject("TaskForm", new TaskForm());
-	     mav.setViewName("task/create");
-//	   taskService.createTask(taskform);
-//	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//	   String userName = auth.getName();
-//	   mav.addObject("userName", userName);
-//	   mav.addObject("TaskForm", new TaskForm());
-//       mav.setViewName("task/index");
-//       List<TaskEntity> tasks = taskService.getTaskAll();
-//       System.out.println(tasks);
-//       mav.addObject("tasks", tasks);
+		 
+	     mav.setViewName("task/new");
+	     
      return mav;
     }   
 	 
