@@ -11,6 +11,8 @@ import com.example.springBoot.entity.TaskEntity;
 @Repository
 public interface TaskReoisitory extends JpaRepository<TaskEntity, Integer>{
 	
-	public List<TaskEntity> findByUserId(int userId);
+	public List<TaskEntity> findByUserIdAndFinish_flg(int userId,boolean finishFlg);
+	
+	public TaskEntity findById(int taskId);
 	
 }

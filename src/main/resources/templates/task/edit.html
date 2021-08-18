@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>編集ページ</h1>
+	<form th:action="@{/task/update}" method="post" th:object="${TaskUpdateRequest}">
+		 <input type="hidden" id="id" name="id" th:field="*{id}">
+   		 <label class="loginId-label">Title</label>
+         <input type="text" name="title" id="title" th:field="*{title}"><br />
+         <label class="loginId-label">Main</label>
+         <textarea name="main" cols="50" rows="5" th:field="*{main}"></textarea><br />
+      <!--    <input type="hidden" id="id" name="id" th:field="*{}"> -->
+         <button type="submit" class="signup-btn">Task更新</button>
+     </form>
+</body>
+</html>

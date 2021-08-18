@@ -7,13 +7,6 @@
 <body>
 	<h1 th:text="${userName}"></h1>
 	<h2>Hello Spring Boot Todo App</h2>
-	<form th:action="@{/task/create}" method="post" th:object="${TaskForm}">
-   		 <label class="loginId-label">Title</label>
-         <input type="text" name="title" id="title" th:field="*{title}"><br />
-         <label class="loginId-label">Main</label>
-         <textarea name="main" cols="50" rows="5" th:field="*{main}"></textarea><br />
-         <button type="submit" class="signup-btn">Task登録</button>
-     </form>
      <table border="1">
 		<tr>
 			<th>title</th>
@@ -25,8 +18,13 @@
 			<td th:text="${task.title}"></td>
 			<td th:text="${task.main}"></td>
 			<td><a th:href="@{'/task/edit/' + ${task.id}}" >編集</a></td>
-			<td>削除</td>
+			<td>
+				<form th:action="@{'/task/delete/' + ${task.id}}" method="post">
+					 <input type="submit" value="削除"/>
+			    </form>
+			</td>
 		</tr>
 	</table>
+	<button onclick="location.href='/user/home'" class="signup-link">homeに戻る</button>	
 </body>
 </html>

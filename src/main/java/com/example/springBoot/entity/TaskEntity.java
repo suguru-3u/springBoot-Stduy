@@ -29,4 +29,11 @@ public class TaskEntity {
     @ManyToOne
     private User user;
      
+    @Column(name = "finish_flg")
+    private boolean finish_flg;
+    
+    @Column(name = "delete_flg")
+    private boolean delete_flg;
 }
+
+	 

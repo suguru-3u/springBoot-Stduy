@@ -11,8 +11,9 @@
 <body>
 	<h1>Hello Spring Boot Todo App</h1>
 	<h2 th:text="${userName}"></h2>
-    <button onclick="location.href='./user/edit'" class="signup-link">ユーザー情報の編集</button>
+    <button onclick="location.href='/user/edit'" class="signup-link">ユーザー情報の編集</button>
 	<h2 th:text="現在抱えているTaskは： + ${taskSize}"></h2>
+	<button onclick="location.href='/task/new'" class="signup-link">Taskの登録</button>	
 	<form th:action="@{/logout}" method="post">
     	<input type="submit" value="Sign Out"/>
     </form>
