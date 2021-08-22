@@ -25,20 +25,7 @@ public class TaskController {
 	TaskService taskService;
 	
 	
-	@RequestMapping(value="/task/index", method=RequestMethod.GET)
-	public ModelAndView indexGet(ModelAndView mav) {
-		
-	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	   String userName = auth.getName();
-	   mav.addObject("userName", userName);
-	   
-       List<TaskEntity> tasks = taskService.getTaskAll();
-       System.out.println(tasks);
-       mav.addObject("tasks", tasks);
-       
-       mav.setViewName("task/index");
-     return mav;
-    }   
+	
 	
 	@RequestMapping(value="/task/index", method=RequestMethod.GET)
 	public ModelAndView indexGet(ModelAndView mav) {
