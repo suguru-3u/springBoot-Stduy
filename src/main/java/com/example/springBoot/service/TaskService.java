@@ -1,7 +1,5 @@
 package com.example.springBoot.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +41,13 @@ public class TaskService {
 	}
 	
 
-	public List<TaskEntity> getTaskAll(){
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
-	    User user = userRepository.findByName(name);
-	    List<TaskEntity> tasks = taskReoisitory.findByUserIdAndFinish_flg(user.getId(),false);
-	    return tasks;
-	}
+//	public List<TaskEntity> getTaskAll(){
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	    String name = auth.getName();
+//	    User user = userRepository.findByName(name);
+//	    List<TaskEntity> tasks = taskReoisitory.findByUserIdAndFinish_flg(user.getId(),false);
+//	    return tasks;
+//	}
 	
 	public TaskEntity getTask(int taskId) {
 		TaskEntity task = taskReoisitory.findById(taskId);

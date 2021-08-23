@@ -1,7 +1,5 @@
 package com.example.springBoot.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,9 +32,9 @@ public class TaskController {
 	   String userName = auth.getName();
 	   mav.addObject("userName", userName);
 	   
-       List<TaskEntity> tasks = taskService.getTaskAll();
-       System.out.println(tasks);
-       mav.addObject("tasks", tasks);
+//       List<TaskEntity> tasks = taskService.getTaskAll();
+//       System.out.println(tasks);
+//       mav.addObject("tasks", tasks);
        
        mav.setViewName("task/index");
      return mav;
@@ -105,9 +103,9 @@ public class TaskController {
 	    mav.addObject("userName", userName);
 	    mav.addObject("TaskForm", new TaskForm());
         mav.setViewName("task/index");
-        List<TaskEntity> tasks = taskService.getTaskAll();
-        System.out.println(tasks);
-        mav.addObject("tasks", tasks);
+//        List<TaskEntity> tasks = taskService.getTaskAll();
+//        System.out.println(tasks);
+//        mav.addObject("tasks", tasks);
         
     return mav;
     }   
@@ -122,9 +120,9 @@ public class TaskController {
 	    mav.addObject("userName", userName);
 	    mav.addObject("TaskForm", new TaskForm());
         mav.setViewName("task/index");
-        List<TaskEntity> tasks = taskService.getTaskAll();
-        System.out.println(tasks);
-        mav.addObject("tasks", tasks);
+//        List<TaskEntity> tasks = taskService.getTaskAll();
+//        System.out.println(tasks);
+//        mav.addObject("tasks", tasks);
         
     return mav;
     }   
